@@ -1,6 +1,6 @@
 <template>
   <div class="left-side">
-    <the-select-list />
+    <the-select-list @selectAll="handleSelectAll" :lists="lists" />
   </div>
   <div class="right-side">
     <draw-list :renderList="lists" />
@@ -18,60 +18,158 @@ export default defineComponent({
     DrawList,
   },
   setup() {
-    const selectedItems = ref([]);
-    const lists = reactive({
-      list1: [
-        {
-          size: 10,
-          color: "#fff000",
-          isSelected: false,
-        },
-        {
-          size: 16,
-          color: "#f0f000",
-          isSelected: false,
-        },
-      ],
-      list2: [
-        {
-          size: 13,
-          color: "#fff000",
-          isSelected: false,
-        },
-        {
-          size: 12,
-          color: "#f0f000",
-          isSelected: false,
-        },
-      ],
-      list3: [selectedItems],
-    });
-    const list1 = reactive([
+    const lists = reactive([
       {
-        size: 10,
-        color: "#fdddee",
         isSelected: false,
+        items: [
+          {
+            size: 7,
+            color: "#00f05c",
+            isSelected: false,
+          },
+          {
+            size: 10,
+            color: "#192fd7",
+            isSelected: false,
+          },
+          {
+            size: 15,
+            color: "#fcba03",
+            isSelected: false,
+          },
+          {
+            size: 30,
+            color: "#b700ff",
+            isSelected: false,
+          },
+        ],
       },
       {
-        size: 16,
-        color: "#f00dee",
         isSelected: false,
-      },
-      {
-        size: 40,
-        color: "#f00dвe",
+        items: [
+          {
+            size: 7,
+            color: "#00f05c",
+            isSelected: false,
+          },
+          {
+            size: 10,
+            color: "#192fd7",
+            isSelected: false,
+          },
+          {
+            size: 15,
+            color: "#fcba03",
+            isSelected: false,
+          },
+          {
+            size: 30,
+            color: "#b700ff",
+            isSelected: false,
+          },
+        ],
+      },{
         isSelected: false,
-      },
-      {
-        size: 0,
-        color: "#fа0dee",
+        items: [
+          {
+            size: 7,
+            color: "#00f05c",
+            isSelected: false,
+          },
+          {
+            size: 10,
+            color: "#192fd7",
+            isSelected: false,
+          },
+          {
+            size: 15,
+            color: "#fcba03",
+            isSelected: false,
+          },
+          {
+            size: 30,
+            color: "#b700ff",
+            isSelected: false,
+          },
+        ],
+      },{
         isSelected: false,
+        items: [
+          {
+            size: 7,
+            color: "#00f05c",
+            isSelected: false,
+          },
+          {
+            size: 10,
+            color: "#192fd7",
+            isSelected: false,
+          },
+          {
+            size: 15,
+            color: "#fcba03",
+            isSelected: false,
+          },
+          {
+            size: 30,
+            color: "#b700ff",
+            isSelected: false,
+          },
+        ],
+      },{
+        isSelected: false,
+        items: [
+          {
+            size: 7,
+            color: "#00f05c",
+            isSelected: false,
+          },
+          {
+            size: 10,
+            color: "#192fd7",
+            isSelected: false,
+          },
+          {
+            size: 15,
+            color: "#fcba03",
+            isSelected: false,
+          },
+          {
+            size: 30,
+            color: "#b700ff",
+            isSelected: false,
+          },
+        ],
       },
     ]);
-
+    // const list1 = reactive([
+    //   {
+    //     size: 10,
+    //     color: "#fdddee",
+    //     isSelected: false,
+    //   },
+    //   {
+    //     size: 16,
+    //     color: "#f00dee",
+    //     isSelected: false,
+    //   },
+    //   {
+    //     size: 40,
+    //     color: "#f00dвe",
+    //     isSelected: false,
+    //   },
+    //   {
+    //     size: 0,
+    //     color: "#fа0dee",
+    //     isSelected: false,
+    //   },
+    // ]);
+      const handleSelectAll = (val) => {
+        console.log(val)
+      }
     return {
-      list1,
       lists,
+      handleSelectAll
     };
   },
 });

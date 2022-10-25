@@ -1,5 +1,5 @@
 <template>
-  <div class="cell" :style="{ 'background-color': color }">Cell</div>
+  <div class="cell" :style="{ 'background-color': color }"></div>
 </template>
 <script>
 import { defineComponent } from "vue";

@@ -2,16 +2,16 @@
   <div>
     <ul
       class="draw-list"
-      v-for="(list, listIndex) in renderList"
+      v-for="(list, listIndex) in checkedLists"
       :key="listIndex"
     >
       List
       {{
-        listIndex
+        listIndex + 1
       }}
       <li
         class="draw-list__item"
-        v-for="(item, itemIndex) in list"
+        v-for="(item, itemIndex) in list.items"
         :key="itemIndex"
       >
         <div>Item {{ itemIndex + 1 }}</div>
@@ -27,14 +27,33 @@
   </div>
 </template>
 <script>
-import { defineComponent } from "vue";
+import { computed, defineComponent } from "vue";
 import TheCell from "./TheCell.vue";
 
 export default defineComponent({
   components: { TheCell },
   name: "DrawList",
   props: ["renderList"],
-  setup() {},
+  setup(props, ctx) {
+    const checkedLists = computed(() => {
+      let newLists = props.renderList.filter( list => list.isSelected === true)
+      console.log('newLists',newLists)
+      
+      return newLists
+    })
+
+    const selectedItems = computed(() => {
+      let items = props.renderList.map( lists => lists.items.filter(item => item.isSelected === true))
+      console.log('items',items)
+
+      return items
+    })
+
+    return {
+      checkedLists,
+      selectedItems
+    }
+  },
 });
 </script>
 <style lang="scss" scoped>
