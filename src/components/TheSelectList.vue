@@ -5,8 +5,8 @@
       v-for="(list, listIndex) in lists"
       :key="listIndex"
     >
-      <label :for="list">{{ listIndex }}</label>
-      <input :id="list" type="checkbox" v-model="list.isSelected" />
+      <label :for="listIndex">List {{ listIndex + 1}}</label>
+      <input :id="listIndex" type="checkbox" v-model="list.isSelected" />
       <li v-for="(item, itemIndex) in list.items" :key="itemIndex">
         <the-item
           :item="item"
@@ -20,7 +20,7 @@
   </div>
 </template>
 <script>
-import { defineComponent, ref, reactive } from "vue";
+import { computed, defineComponent, ref, reactive } from "vue";
 import TheItem from "./TheItem.vue";
 
 export default defineComponent({
@@ -29,9 +29,12 @@ export default defineComponent({
   // props: ["selectLists", "selectedItems"],
   setup(props, ctx) {
     const checkedItems = ref([]);
+    const checkedLists = computed(() => {
+      lists
+    })
 
-    const lists = reactive({
-      list1: {
+    const lists = reactive([
+      {
         isSelected: false,
         items: [
           {
@@ -46,7 +49,7 @@ export default defineComponent({
           },
         ],
       },
-      list2: {
+     {
         isSelected: false,
         items: [
           {
@@ -61,8 +64,8 @@ export default defineComponent({
           },
         ],
       },
-      list3: [],
-    });
+      
+    ]);
 
     return {
       checkedItems,

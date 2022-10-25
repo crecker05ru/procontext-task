@@ -2,14 +2,14 @@
   <div class="item">
     <label :for="itemIndex">Item {{ itemIndex + 1 }}</label>
     <input
+    class="item__checkbox"
       type="checkbox"
       :id="itemIndex"
       v-model="isSelected"
       @input="$emit('update:isSelected', $event.target.checked)"
     />
-    <input type="number" v-model="size" @input="$emit('update:size', size)" />
-    <input type="color" v-model="color" @input="$emit('update:color', color)" />
-    <div class="item-cell">Color {{ item.color }}</div>
+    <input class="item__number" type="number" v-model="size" @input="$emit('update:size', size)" />
+    <input class="item__color" type="color" v-model="color" @input="$emit('update:color', color)" />
   </div>
 </template>
 <script>
@@ -42,4 +42,16 @@ export default defineComponent({
 });
 </script>
 <style lang="scss" scoped>
+.item {
+  &__number {
+    width: 30px;
+    padding: 2px;
+    text-align: center;
+  }
+  &__color {
+    width: auto;
+    height: 25px;
+    padding: 0;
+  }
+}
 </style>
