@@ -1,14 +1,13 @@
 <template>
-  <div class="cell">Cell</div>
+  <div class="cell" :style="{ 'background-color': color }">Cell</div>
 </template>
 <script>
-import { defineComponent } from 'vue'
+import { defineComponent } from "vue";
 
 export default defineComponent({
-  setup() {
-    
-  },
-})
+  props: ["color"],
+  setup() {},
+});
 </script>
 <style lang="scss" scoped>
 .cell {

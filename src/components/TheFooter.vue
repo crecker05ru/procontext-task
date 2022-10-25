@@ -1,6 +1,6 @@
 <template>
-  <footer class="footer">
-    <section class="footer__section">
+  <footer class="the-footer">
+    <section class="the-footer__section">
       <div>Developed by Anvar</div>
     </section>
   </footer>
@@ -14,7 +14,7 @@ export default defineComponent({
 });
 </script>
 <style lang="scss">
-.footer {
+.the-footer {
   min-height: 80px;
   &__section {
     margin: 0 auto;

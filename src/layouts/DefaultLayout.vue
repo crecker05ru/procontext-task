@@ -7,7 +7,7 @@
 import { defineComponent } from "vue";
 
 export default defineComponent({
-  name: "BodyLayout",
+  name: "DefaultLayout",
   setup() {},
 });
 </script>
