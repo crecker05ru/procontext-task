@@ -1,7 +1,13 @@
 <template>
   <div class="select-lists" v-for="(list, listIndex) in lists" :key="listIndex">
-    <div :class="{'select-lists__arrow-open': true, 'arrow-close': isVisibleList[listIndex]}" @click="handleOpenList(listIndex)"></div>
-   
+    <div
+      :class="{
+        'select-lists__arrow-open': true,
+        'arrow-close': isVisibleList[listIndex],
+      }"
+      @click="handleOpenList(listIndex)"
+    ></div>
+
     <input
       :class="{ 'select-lists__list-checkbox': true, partially: list.addStyle }"
       ref="input"
@@ -11,7 +17,9 @@
       :checked="list.isSelected"
       @change="handleChange({ listIndex, checked: $event.target.checked })"
     />
-    <label :for="listIndex" class="select-lists__label">List {{ listIndex + 1 }}</label>
+    <label :for="listIndex" class="select-lists__label"
+      >List {{ listIndex + 1 }}</label
+    >
     <ul class="select-lists__list" v-show="isVisibleList[listIndex]">
       <li v-for="(item, itemIndex) in list.items" :key="itemIndex">
         <the-item
@@ -26,7 +34,7 @@
   </div>
 </template>
 <script>
-import { computed, defineComponent, ref, watch } from "vue";
+import { defineComponent, ref, watch } from "vue";
 import TheItem from "./TheItem.vue";
 
 export default defineComponent({
@@ -36,50 +44,19 @@ export default defineComponent({
   emits: ["selectAll"],
   setup(props, ctx) {
     const input = ref();
-    const isVisibleList = ref([false,false,false,false,false,false,false]);
+    const isVisibleList = ref([
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+    ]);
 
     const handleOpenList = (indx) => {
-      isVisibleList.value[indx] = !isVisibleList.value[indx]
-    }
-    const isListChecked = computed(() => {
-      return props.lists.filter((list) =>
-        list.isSelected === true
-          ? list.items.forEach((item) => (item.isSelected = true))
-          : list
-      );
-    });
-    // const lists = reactive([
-    //   {
-    //     isSelected: false,
-    //     items: [
-    //       {
-    //         size: 10,
-    //         color: "#00f05c",
-    //         isSelected: false,
-    //       },
-    //       {
-    //         size: 16,
-    //         color: "#192fd7",
-    //         isSelected: false,
-    //       },
-    //     ],
-    //   },
-    //  {
-    //     isSelected: false,
-    //     items: [
-    //       {
-    //         size: 13,
-    //         color: "#fff000",
-    //         isSelected: false,
-    //       },
-    //       {
-    //         size: 12,
-    //         color: "#f0f000",
-    //         isSelected: false,
-    //       },
-    //     ],
-    //   },
-    // ]);
+      isVisibleList.value[indx] = !isVisibleList.value[indx];
+    };
 
     const handleChange = (params) => {
       ctx.emit("selectAll", params);
@@ -96,30 +73,9 @@ export default defineComponent({
       }
     };
 
-    // watch(() => props.lists,() => {
-
-    //   props.lists.forEach(list => {
-    //     if(list.isSelected === true){
-    //       list.items.forEach(item => {
-    //         item.isSelected = true
-    //       })
-    //     }
-    //     // else if(list.isSelected === false){
-    //     //   list.items.forEach(item => {
-    //     //     item.isSelected = false
-    //     //   })
-    //     // }
-    //   })
-    //   console.log('props.lists',props.lists)
-    //   console.log('isListChecked',isListChecked)
-    // },
-    // { deep: true })
-
     watch(
       () => props.lists,
       (newVal, oldVal) => {
-        console.log("(newVal, oldVal)", newVal, " /n", oldVal);
-        console.log("input", input.value);
         props.lists.forEach((list) => {
           if (list.items.some((item) => item.isSelected === true)) {
             list.addStyle = true;
@@ -132,7 +88,6 @@ export default defineComponent({
             list.isSelected = true;
           } else if (list.items.some((item) => item.isSelected === false)) {
             list.isSelected = false;
-            // list.addStyle = false
           }
         });
       },
@@ -171,18 +126,16 @@ export default defineComponent({
     border-right: 2px solid #000;
     transform: rotate(-45deg);
     cursor: pointer;
-    transition: all ease-in .2s;
+    transition: all ease-in 0.2s;
   }
 
-
   &__label {
-    
   }
 }
 
 .arrow-close {
-    transform: rotate(45deg);
-  }
+  transform: rotate(45deg);
+}
 .partially {
   &::after {
     position: absolute;
@@ -192,7 +145,6 @@ export default defineComponent({
     width: 6px;
     height: 7px;
     background-color: rgb(0, 153, 153);
-    // border-radius: 50%;
   }
 }
 </style>

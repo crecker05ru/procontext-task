@@ -68,7 +68,8 @@ export default defineComponent({
             isSelected: false,
           },
         ],
-      },{
+      },
+      {
         isSelected: false,
         items: [
           {
@@ -92,7 +93,8 @@ export default defineComponent({
             isSelected: false,
           },
         ],
-      },{
+      },
+      {
         isSelected: false,
         items: [
           {
@@ -116,7 +118,8 @@ export default defineComponent({
             isSelected: false,
           },
         ],
-      },{
+      },
+      {
         isSelected: false,
         items: [
           {
@@ -142,34 +145,13 @@ export default defineComponent({
         ],
       },
     ]);
-    // const list1 = reactive([
-    //   {
-    //     size: 10,
-    //     color: "#fdddee",
-    //     isSelected: false,
-    //   },
-    //   {
-    //     size: 16,
-    //     color: "#f00dee",
-    //     isSelected: false,
-    //   },
-    //   {
-    //     size: 40,
-    //     color: "#f00dвe",
-    //     isSelected: false,
-    //   },
-    //   {
-    //     size: 0,
-    //     color: "#fа0dee",
-    //     isSelected: false,
-    //   },
-    // ]);
-      const handleSelectAll = (val) => {
-        console.log(val)
-      }
+
+    const handleSelectAll = (val) => {
+      console.log(val);
+    };
     return {
       lists,
-      handleSelectAll
+      handleSelectAll,
     };
   },
 });
@@ -180,6 +162,7 @@ export default defineComponent({
   width: 100%;
   max-width: 600px;
 }
+
 .right-side {
   border: 1px solid #000;
   width: 100%;

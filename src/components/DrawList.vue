@@ -12,7 +12,7 @@
         v-for="(item, itemIndex) in list.items"
         :key="itemIndex"
       >
-        <div class="draw-list__item-colors" >
+        <div class="draw-list__item-colors">
           <the-cell
             v-for="number in item.size"
             :key="number"
@@ -21,8 +21,12 @@
         </div>
       </li>
       <li v-else>
-        <div class="draw-list__item-colors" >
-          <the-cell v-for="(color, colorIndex) in shufleList" :key="colorIndex" :color="color" />
+        <div class="draw-list__item-colors">
+          <the-cell
+            v-for="(color, colorIndex) in shufleList"
+            :key="colorIndex"
+            :color="color"
+          />
         </div>
       </li>
     </ul>
@@ -40,14 +44,9 @@ export default defineComponent({
     const isShufle = ref(false);
 
     const selectedItems = computed(() => {
-      // let copObj = JSON.parse(JSON.stringify(props.renderList))
-
       let filteredItems = props.list.items.filter(
         (item) => item.isSelected === true
       );
-      // let  newLists = props.renderList.filter( list => list.items = filteredItems)
-      console.log("filteredItems", filteredItems);
-      // console.log('newLists',newLists)
 
       return filteredItems;
     });
@@ -58,25 +57,11 @@ export default defineComponent({
 
     const shufleList = computed(() => {
       const shufleArr = [];
-      // props.renderList.forEach(lists => {
-      //   // lists.forEach(item => {
-      //   //   shufleArr.push(lists)
-      //   // })
-      //   let {items} = lists
-      //   shufleArr.push(items)
-      // });
-
-      // props.renderList.map( list => {
-      //   list.map(item => {
-      //     console.log('item',item)
-      //   })
-      // })
       selectedItems.value.forEach((item) => {
         for (let i = 1; i <= item.size; i++) {
           shufleArr.push(item.color);
         }
       });
-      console.log("shufleArr", shufleArr);
 
       return isShufle.value
         ? shufleArr.sort(() => Math.random() - 0.5)

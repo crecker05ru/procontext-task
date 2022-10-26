@@ -46,12 +46,11 @@ export default defineComponent({
     });
 
     function changeItemColor(color) {
-      ctx.emit("update:modelValue", color); // раньше было `this.$emit('input', title)`
+      ctx.emit("update:modelValue", color);
     }
     watch(
       () => props.item.isSelected,
       (newVal, oldVal) => {
-        console.log("isSelected + newVal", isSelected.value, " ", newVal);
         isSelected.value = newVal;
       }
     );

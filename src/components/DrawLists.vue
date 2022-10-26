@@ -22,21 +22,15 @@ export default defineComponent({
       let newLists = props.renderList.filter(
         (list) => list.isSelected === true
       );
-      console.log("newLists", newLists);
 
       return newLists;
     });
 
     const selectedItems = computed(() => {
-      // let copObj = JSON.parse(JSON.stringify(props.renderList))
-
       let filteredItems = props.renderList.map((list) => ({
         ...list,
         items: list.items.filter((item) => item.isSelected === true),
       }));
-      // let  newLists = props.renderList.filter( list => list.items = filteredItems)
-      console.log("filteredItems", filteredItems);
-      // console.log('newLists',newLists)
 
       return filteredItems;
     });
