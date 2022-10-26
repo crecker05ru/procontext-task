@@ -128,9 +128,6 @@ export default defineComponent({
     cursor: pointer;
     transition: all ease-in 0.2s;
   }
-
-  &__label {
-  }
 }
 
 .arrow-close {
@@ -141,9 +138,9 @@ export default defineComponent({
     position: absolute;
     content: "";
     left: 3px;
-    top: 2px;
+    top: 3px;
     width: 6px;
-    height: 7px;
+    height: 6px;
     background-color: rgb(0, 153, 153);
   }
 }
