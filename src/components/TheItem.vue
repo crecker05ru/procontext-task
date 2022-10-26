@@ -9,11 +9,11 @@
       @input="$emit('update:isSelected', $event.target.checked)"
     />
     <input class="item__number" type="number" v-model="size" @input="$emit('update:size', size)" />
-    <input class="item__color" type="color" v-model="color" @input="$emit('update:color', color)" />
+    <input class="item__color" type="color" v-model="color" @change="$emit('update:color', color)" />
   </div>
 </template>
 <script>
-import { defineComponent, reactive, ref } from "vue";
+import { defineComponent, reactive, ref,watch } from "vue";
 
 export default defineComponent({
   name: "TheItem",
@@ -32,6 +32,11 @@ export default defineComponent({
     function changeItemColor(color) {
       ctx.emit("update:modelValue", color); // раньше было `this.$emit('input', title)`
     }
+    watch(() => props.item.isSelected,(newVal, oldVal) => {
+      console.log('isSelected + newVal',isSelected.value,' ',newVal)
+      isSelected.value = newVal
+    })
+
     return {
       itemData,
       color,

@@ -2,7 +2,7 @@
   <div>
     <ul
       class="draw-list"
-      v-for="(list, listIndex) in checkedLists"
+      v-for="(list, listIndex) in selectedItems"
       :key="listIndex"
     >
       List
@@ -43,10 +43,14 @@ export default defineComponent({
     })
 
     const selectedItems = computed(() => {
-      let items = props.renderList.map( lists => lists.items.filter(item => item.isSelected === true))
-      console.log('items',items)
+      // let copObj = JSON.parse(JSON.stringify(props.renderList))
 
-      return items
+      let filteredItems = props.renderList.map( list => ({...list, items: list.items.filter(item => item.isSelected === true)}))
+      // let  newLists = props.renderList.filter( list => list.items = filteredItems)
+      console.log('filteredItems',filteredItems)
+      // console.log('newLists',newLists)
+
+      return filteredItems
     })
 
     return {
