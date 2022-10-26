@@ -5,7 +5,7 @@
       v-for="(list, listIndex) in lists"
       :key="listIndex"
     >
-      <label :for="listIndex">List {{ listIndex + 1}} checked = {{list.isSelected}}</label>
+      <label :for="listIndex">List {{ listIndex + 1}}</label>
       <input :class="{'select-list__list-checkbox': true, 'partially': list.addStyle }"  ref="input" :id="listIndex" type="checkbox" v-bind="list.isSelected" :checked="list.isSelected" @change="handleChange({listIndex, checked: $event.target.checked})" />
       <li v-for="(item, itemIndex) in list.items" :key="itemIndex">
         <the-item

@@ -3,19 +3,19 @@
     <the-select-list @selectAll="handleSelectAll" :lists="lists" />
   </div>
   <div class="right-side">
-    <draw-list :renderList="lists" />
+    <draw-lists :renderList="lists" />
   </div>
 </template>
 <script>
 import { defineComponent, reactive, ref } from "vue";
-import DrawList from "./DrawList.vue";
+import DrawLists from "./DrawLists.vue";
 import TheSelectList from "./TheSelectList.vue";
 
 export default defineComponent({
   name: "ColorLists",
   components: {
     TheSelectList,
-    DrawList,
+    DrawLists,
   },
   setup() {
     const lists = reactive([
