@@ -9,17 +9,25 @@
       {{
         listIndex + 1
       }}
+      <button @click="handleSorting" class="draw-list__button">{{isShufle? 'Сортировать' : 'Перемешать'}}</button>
       <li
         class="draw-list__item"
         v-for="(item, itemIndex) in list.items"
         :key="itemIndex"
       >
-        <div>Item {{ itemIndex + 1 }}</div>
-        <div class="draw-list__item-colors">
+
+        <div class="draw-list__item-colors" v-if="!isShufle">
           <the-cell
             v-for="number in item.size"
             :key="number"
             :color="item.color"
+          />
+        </div>
+        <div class="draw-list__item-colors" v-else>
+          <the-cell
+            v-for="color in shufleList"
+            :key="color"
+            :color="color"
           />
         </div>
       </li>
@@ -27,7 +35,7 @@
   </div>
 </template>
 <script>
-import { computed, defineComponent } from "vue";
+import { computed, defineComponent,ref } from "vue";
 import TheCell from "./TheCell.vue";
 
 export default defineComponent({
@@ -35,6 +43,7 @@ export default defineComponent({
   name: "DrawList",
   props: ["renderList"],
   setup(props, ctx) {
+    const isShufle = ref(false)
     const checkedLists = computed(() => {
       let newLists = props.renderList.filter( list => list.isSelected === true)
       console.log('newLists',newLists)
@@ -53,9 +62,44 @@ export default defineComponent({
       return filteredItems
     })
 
+    const handleSorting = () => {
+      isShufle.value = !isShufle.value
+    }
+
+    const shufleList = computed(() => {
+      const shufleArr = []
+      // props.renderList.forEach(lists => {
+      //   // lists.forEach(item => {
+      //   //   shufleArr.push(lists)
+      //   // })
+      //   let {items} = lists
+      //   shufleArr.push(items)
+      // });
+
+      // props.renderList.map( list => {
+      //   list.map(item => {
+      //     console.log('item',item)
+      //   })
+      // })
+      selectedItems.value.forEach(lists => {
+        lists.items.forEach( item => {
+          for(let i = 0; i <= item.size; i++){
+            shufleArr.push(item.color)
+          }
+          
+        })
+      })
+      console.log('shufleArr',shufleArr)
+
+      return isShufle.value ? shufleArr.sort( () => Math.random() - 0.5)
+      : selectedItems
+    })
     return {
       checkedLists,
-      selectedItems
+      selectedItems,
+      isShufle,
+      shufleList,
+      handleSorting
     }
   },
 });
@@ -63,11 +107,29 @@ export default defineComponent({
 <style lang="scss" scoped>
 .draw-list {
   border: 1px solid #000;
+  position: relative;
+  min-height: 40px;
+  padding: 10px;
+
+  &__item {
+    margin-bottom: 5px;
+  }
 
   &__item-colors {
     display: flex;
     flex-wrap: wrap;
     gap: 5px;
+  }
+
+  &__button {
+    position: absolute;
+    background-color: rgb(0, 106, 255);
+    height: 20px;
+    font-size: 14px;
+    line-height: 10px;
+    right: 0;
+    top: 0;
+
   }
 }
 </style>
