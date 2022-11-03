@@ -4,11 +4,11 @@
       <input
         class="item__checkbox"
         type="checkbox"
-        :id="itemIndex"
+        :id="String(listIndex)+String(itemIndex)"
         v-model="isSelected"
         @input="$emit('update:isSelected', $event.target.checked)"
       />
-      <label :for="itemIndex" class="item__label"
+      <label :for="String(listIndex)+String(itemIndex)" class="item__label" 
         >Item {{ itemIndex + 1 }}</label
       >
     </div>
@@ -33,8 +33,8 @@ import { defineComponent, reactive, ref, watch } from "vue";
 
 export default defineComponent({
   name: "TheItem",
-  props: ["item", "itemIndex", "modelValue"],
-  emits: ["update:modelValue"],
+  props: ["item", "itemIndex", "modelValue","listIndex"],
+  emits: ["update:modelValue","update:isSelected"],
   setup(props, ctx) {
     const color = ref(props.item.color);
     const size = ref(props.item.size);
@@ -51,6 +51,7 @@ export default defineComponent({
     watch(
       () => props.item.isSelected,
       (newVal, oldVal) => {
+        console.log('Item newVal, oldVal',newVal, oldVal)
         isSelected.value = newVal;
       }
     );

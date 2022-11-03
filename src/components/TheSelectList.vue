@@ -25,6 +25,7 @@
         <the-item
           :item="item"
           :itemIndex="itemIndex"
+          :listIndex="listIndex"
           v-model:color="item.color"
           v-model:size="item.size"
           v-model:isSelected="item.isSelected"
@@ -76,6 +77,7 @@ export default defineComponent({
     watch(
       () => props.lists,
       (newVal, oldVal) => {
+        console.log('List newVal, oldVal',newVal, oldVal)
         props.lists.forEach((list) => {
           if (list.items.some((item) => item.isSelected === true)) {
             list.addStyle = true;
